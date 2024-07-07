@@ -1,0 +1,70 @@
+﻿@model RecipeBlogProject.Models.Person
+
+@{
+    TempData["Title"] = "Edit Profile Page";
+    Layout = "~/views/shared/_UserProfileLayout.cshtml";
+}
+<div class="container d-flex justify-content-center" style="margin-top:10rem; margin-bottom:9rem;">
+    <div class="row">
+        <div class="col">
+            <form asp-action="Edit" method="POST" class="form" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <p class="title">Edit Profile Info</p>
+                <div class="flex">
+                    <label asp-for="Firstname">
+                        <input asp-for="Firstname" class="input" type="text" placeholder="" required>
+                        <span>First Name</span>
+                    </label>
+
+                    <label asp-for="Lastname">
+                        <input asp-for="Lastname" class="input" type="text" placeholder="" required>
+                        <span>Last Name</span>
+                    </label>
+                </div>
+                <div class="flex">
+                    <label asp-for="Gender">
+                        <input asp-for="Gender" class="input" type="text" placeholder="" required>
+                        <span>Gender</span>
+                    </label>
+
+                    <label asp-for="Phone">
+                        <input asp-for="Phone" class="input" type="text" placeholder="" required>
+                        <span>Phone Number</span>
+                    </label>
+                </div>
+
+                <label asp-for="Email">
+                    <input asp-for="Email" class="input" type="email" placeholder="" required>
+                    <span>Email</span>
+                </label>
+
+                <label asp-for="Password">
+                    <input asp-for="Password" class="input" type="password" placeholder="" required>
+                    <span>Password</span>
+                </label>
+
+                <div class="form-group">
+                    <label >Profile Image</label>
+                    <input type="file" name="ProfileImage" class="form-control" id="ProfileImage">
+                </div>
+
+                <input type="hidden" asp-for="id" />
+                <button class="submit">Save Changes</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function previewImage(event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var output = document.getElementById('imagePreview');
+            output.src = reader.result;
+            output.style.display = 'block';
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+
+    document.getElementById('ProfileImage').addEventListener('change', previewImage);
+</script>

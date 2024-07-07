@@ -1,0 +1,82 @@
+﻿@model IEnumerable<RecipeBlogProject.Models.Person>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="container" style="display:flex; flex-direction:column; justify-content:space-around;">
+    <div class="row my-4">
+        <div class="col">
+            <a asp-action="Create" class="btn btn-primary p-2"><span><Strong>Create Chef</Strong></span></a>
+        </div>
+    </div>
+    <div class="row mb-5 mt-2">
+        <div class="col-lg">
+            <div class="card shadow">
+                <div class="card-header py-4 ">
+                    <h6 class="m-0 font-weight-bold text-primary">Chefs</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" style="width=100%" cellspacing="0">
+                            <thead>
+                                <tr style="text-align:center">
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Role</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Enabled Status</th>
+                                    <th style="text-align:center">
+                                        Actions
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Firstname)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Lastname)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.RoleId)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Email)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Phone)
+                                        </td>
+                                        <td>
+                                            @if (!item.IsDeleted)
+                                            {
+                                <dd class="col-sm-4" style="color:lightgreen">@Html.DisplayFor(modelItem => item.Phone)</dd>
+                                            }
+                                            else
+                                            {
+                                <dd class="col-sm-4" style="color:red">@Html.DisplayFor(modelItem => item.Phone)</dd>
+
+                                            }
+                                            
+                                        </td>
+                                        <td>
+                                            <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                                            <a asp-action="Details" asp-route-id="@item.id">Details</a> |
+                                            <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

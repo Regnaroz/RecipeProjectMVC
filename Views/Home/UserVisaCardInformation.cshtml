@@ -1,0 +1,57 @@
+﻿@model RecipeBlogProject.Models.Visacard
+
+@{
+    ViewData["Title"] = "UserVisaInformation";
+    Layout = "~/Views/Shared/_VisaCardLayout.cshtml";
+}
+
+<div class="Register-Form-Container" style="margin-top:7rem; margin-bottom:20rem;">
+    <section id="SignUpForm" class="SignUpForm" >
+        <div class="container" data-aos="fade-up" style="padding:2rem;">
+            <div class="section-title p-0 text-start">
+                <h2 class="text-start">Visa Card Information</h2>
+                <p>Visa Card</p>
+            </div>
+            <form asp-action="UserVisaInformation" method="POST" id="booking-form" class="p-0">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group form-input">
+                    <input asp-for="Firstname" type="text" id="name" required />
+                    <label asp-for="Firstname" class="form-label">First Name</label>
+                    <span asp-validation-for="Firstname" class="text-danger"></span>
+                </div>
+                <div class="form-group form-input">
+                    <input asp-for="Lastname" type="text" id="name" required />
+                    <label asp-for="Lastname" class="form-label">Last Name</label>
+                    <span asp-validation-for="Lastname" class="text-danger"></span>
+                </div>
+                <div class="form-group form-input">
+                    <input asp-for="Cardnumber" type="number" id="name" required />
+                    <label asp-for="Cardnumber" class="form-label">Card Number</label>
+                    <span asp-validation-for="Cardnumber" class="text-danger"></span>
+                </div>
+                <div class="form-group form-input">
+                    <input asp-for="Expirydate" type="number" required />
+                    <label asp-for="Expirydate" class="form-label">Expiry Date</label>
+                    <span asp-validation-for="Expirydate" class="text-danger"></span>
+                </div>
+                <div class="form-group form-input">
+                    <input asp-for="Cvv" type="text" required />
+                    <label asp-for="Cvv" class="form-label">CVV</label>
+                    <span asp-validation-for="Cvv" class="text-danger"></span>
+                </div>
+                <input type="hidden" asp-for="id" />
+                <div class="form-submit" style="margin-top:3rem;">
+                    <div class="text-center">
+                        <button type="submit" class="submit register-btn" id="submit" name="submit">Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

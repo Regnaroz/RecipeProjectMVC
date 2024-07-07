@@ -1,0 +1,89 @@
+﻿@model IEnumerable<RecipeBlogProject.Models.Recipepayment>
+@{
+    Layout = "~/views/shared/_PurchasedRecipesLayout.cshtml";
+}
+
+
+<section class="intro" style="margin-top:7rem; margin-bottom:3rem;">
+    <div class="bg-image h-100">
+        <div class="mask d-flex align-items-center h-100">
+            <div class="container" data-aos="fade-up">
+                <div class="section-title p-0 text-start mb-3">
+                    <h2 class="text-start">Purchased Recipes</h2>
+                    <p>What Have You Bought</p>
+                </div>
+                <br />
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <div class="card shadow-2-strong">
+                            <div class="card-body p-0">
+                                <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative; height: 700px">
+                                    <table class="table table-dark mb-0">
+                                        <thead>
+                                            <tr class="text-uppercase text-success">
+                                                <th>
+                                                    Recipe Name
+                                                </th>
+                                                <th>
+                                                    Total Amount
+                                                </th>
+                                                <th>
+                                                    Date of Purchase
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Recipe.Receipename)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Totalamount)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.CreatedDate)
+                                                    </td>
+                                                </tr>
+                                            }
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    html,
+    body,
+    .intro {
+        height: 100%;
+    }
+
+    table td,
+    table th {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    .card {
+        border-radius: .5rem;
+    }
+
+    .table-scroll {
+        border-radius: .5rem;
+    }
+
+    thead {
+        top: 0;
+        position: sticky;
+    }
+</style>

@@ -1,0 +1,107 @@
+﻿@model IEnumerable<RecipeBlogProject.Models.Person>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container w-100" style="max-width:unset;margin:0px;display:flex; flex-direction:column; justify-content:space-around;">
+    <h4>Manage Users</h4>
+    <div class="row mb-5 mt-2">
+        <div class="col-lg">
+            <div class="card shadow">
+                <div class="card-header py-4 ">
+                    <div>
+                        <h6 class="m-0 font-weight-bold text-primary">Users</h6>
+                    </div>
+                    <div class="btn-export-container">
+                        <button class="btn btn-outline-danger" id="btnPdfExport" value="Export">Export to pdf</button>
+                        <button class="btn btn-outline-success" id="btnExcelExport" value="Export">Export to excel</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="userTable" style="width=100%" cellspacing="0">
+                            <thead>
+                                <tr style="text-align:center">
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Gender</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Enabled Status</th>
+                                    <th style="text-align:center">
+                                        
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Firstname)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Lastname)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Gender)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Email)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Phone)
+                                        </td>
+                                            @if (!item.IsDeleted)
+                                            {
+                                <td class="" >Enabled</td>
+                                            }
+                                            else
+                                            {
+                                <td class="" >Disabled</td>
+
+                                            }
+                                        <td>
+                                            <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                                            <a class="btn btn-info" asp-action="Details" asp-route-id="@item.id">Details</a> |
+                                            @if(item.IsDeleted)
+                                            {
+                                                <a class="btn btn-primary" asp-action="EnablePerson" asp-route-id="@item.id">Enable</a>
+                                            }
+                                            else
+                                            {
+                                                <a class="btn btn-danger" asp-action="DeletePerson" asp-route-id="@item.id">Disable</a>
+                                            }
+
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+</style>
+<script type="text/javascript">
+    $(function () {
+        $("#btnExcelExport").click(function () {
+            $("#userTable").table2excel({
+                filename: "Users.xls"
+            });
+        });
+    });
+    $("#btnPdfExport").click(function () {
+        generatePDF('userTable', 'Users.pdf', [6]);
+    });
+</script>

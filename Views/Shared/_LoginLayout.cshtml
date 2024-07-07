@@ -1,0 +1,51 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+	<title>Login Page</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Favicons -->
+	<link href="~/Home/assets/img/favicon.png" rel="icon">
+	<link href="~/Home/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" href="~/Login-Register/login-assets/css/style.css">
+
+</head>
+<body style="background-image: linear-gradient(67.5deg, rgba(6,6,6, 0.42) 0%, rgba(6,6,6, 0.42) 6%,rgba(29,29,29, 0) 6%, rgba(29,29,29, 0) 57%,rgb(52,52,52) 57%, rgb(52,52,52) 58%,rgb(75,75,75) 58%, rgb(75,75,75) 79%,rgb(97, 97, 97) 79%, rgb(97, 97, 97) 93%,rgb(120, 120, 120) 93%, rgb(120, 120, 120) 95%,rgb(143,143,143) 95%, rgb(143,143,143) 100%),linear-gradient(90deg, rgba(6,6,6, 0.42) 0%, rgba(6,6,6, 0.42) 6%,rgba(29,29,29, 0) 6%, rgba(29,29,29, 0) 57%,rgb(52,52,52) 57%, rgb(52,52,52) 58%,rgb(75,75,75) 58%, rgb(75,75,75) 79%,rgb(97, 97, 97) 79%, rgb(97, 97, 97) 93%,rgb(120, 120, 120) 93%, rgb(120, 120, 120) 95%,rgb(143,143,143) 95%, rgb(143,143,143) 100%),linear-gradient(135deg, rgba(6,6,6, 0.42) 0%, rgba(6,6,6, 0.42) 6%,rgba(29,29,29, 0) 6%, rgba(29,29,29, 0) 57%,rgb(52,52,52) 57%, rgb(52,52,52) 58%,rgb(75,75,75) 58%, rgb(75,75,75) 79%,rgb(97, 97, 97) 79%, rgb(97, 97, 97) 93%,rgb(120, 120, 120) 93%, rgb(120, 120, 120) 95%,rgb(143,143,143) 95%, rgb(143,143,143) 100%),linear-gradient(0deg, rgba(6,6,6, 0.42) 0%, rgba(6,6,6, 0.42) 6%,rgba(29,29,29, 0) 6%, rgba(29,29,29, 0) 57%,rgb(52,52,52) 57%, rgb(52,52,52) 58%,rgb(75,75,75) 58%, rgb(75,75,75) 79%,rgb(97, 97, 97) 79%, rgb(97, 97, 97) 93%,rgb(120, 120, 120) 93%, rgb(120, 120, 120) 95%,rgb(143,143,143) 95%, rgb(143,143,143) 100%),linear-gradient(90deg, rgb(8,8,8),rgb(217,186,133)); background-blend-mode:overlay,overlay,overlay,overlay,normal;">
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-12 col-lg-10">
+					<div class="wrap d-md-flex">
+						<img class="img" src="~/Login-Register/login-assets/images/Murielle-Banackissa-Vegan-Recipe-Blog.jpg">
+						</img>
+						<div class="login-wrap p-4 p-md-5">
+							<div class="d-flex">
+								<div class="w-100">
+									<h3 class="mb-4">Sign In</h3>
+								</div>
+							</div>
+    <div>
+        @RenderBody()
+    </div>
+							<p class="text-center">Not a member? <a asp-controller="Register" asp-action="Register_Index">Sign Up</a></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script src="~/Login-Register/login-assets/js/jquery.min.js"></script>
+	<script src="~/Login-Register/login-assets/js/popper.js"></script>
+	<script src="~/Login-Register/login-assets/js/bootstrap.min.js"></script>
+	<script src="~/Login-Register/login-assets/js/main.js"></script>
+	@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+

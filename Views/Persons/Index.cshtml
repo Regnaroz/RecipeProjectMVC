@@ -1,0 +1,62 @@
+﻿@model IEnumerable<RecipeBlogProject.Models.Person>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/views/shared/_AdminLayout.cshtml";
+}
+
+<h1>Registered Users Information</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">
+        <span class="text">Add New Person</span>
+    </a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Firstname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lastname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Firstname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lastname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                    <a asp-action="Edit" class="btn btn-secondary" asp-route-id="@item.id"><span class="text">Edit</span></a> |
+                    <a asp-action="Details" class="btn btn-info" asp-route-id="@item.id"> <span class="text">Details</span></a> |
+                    <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.id"><span class="text">Delete</span></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,129 @@
+﻿@model RecipeProject.Models.DataModels.CategoryRecepies;
+
+@{
+    ViewData["Title"] = "CategoryEdit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<div class="content-container">
+    <h4>@Model.Category.Categoryname category</h4>
+    <dl class="row">
+        <dt class="col-2">
+            <p> @Html.DisplayNameFor(model => model.Category.Categoryname)</p>
+        </dt>
+        <dd class="col-2">
+            @Html.DisplayFor(model => model.Category.Categoryname)
+        </dd>
+       
+        <dt class="col-2 offset-4">
+            <p>Marked Deleted:</p>
+        </dt>
+        <dd class="col-2">
+            @if (Model.Category.IsDeleted)
+            {
+                <p style="color:red;">Deleted</p>
+            }
+            else
+            {
+                <p style="color:lightgreen;">Not Deleted</p>
+            }
+        </dd>
+    </dl>
+
+@if(Model.Recipes.Count() > 0)
+{
+    <div class="row mb-5 mt-2">
+        <div class="col-lg">
+            <div class="card shadow">
+                <div class="card-header py-4 ">
+                   <div>
+                            <h6 class="m-0 font-weight-bold text-primary">Recepies with @Model.Category.Categoryname category</h6>
+                 </div>
+                        <div class="btn-export-container">
+                            <button class="btn btn-outline-danger" id="btnPdfExport" value="Export">Export to pdf</button>
+                            <button class="btn btn-outline-success" id="btnExcelExport" value="Export">Export to excel</button>
+                        </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="CategoryRecepiesTable" style="width=100%" cellspacing="0">
+                            <thead>
+                                <tr style="text-align:center">
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Recipes.FirstOrDefault().Receipename)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Recipes.FirstOrDefault().Price)
+                                    </th>
+                                    <th>
+                                        Chef's Name
+                                    </th>
+                                    <th>
+                                        Enabled Status
+                                    </th>
+                                    <th>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Recipes)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Receipename)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Price)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Chef.Person.Firstname) @Html.DisplayFor(modelItem => item.Chef.Person.Lastname)
+                                        </td>
+                                        <td>
+                                            @if (item.IsDeleted)
+                                            {
+                                                <p>Disabled</p>
+                                            }
+                                            else
+                                            {
+                                                <p>Enabled</p>
+                                            }
+                                        </td>
+                                        <td>
+                                                <a class="btn btn-info" asp-action="AdminRecipeDetails" asp-route-id="@item.id">Recepie Details</a>
+                                            </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<div>
+    <a class="btn btn-primary" asp-action="Categories">Back to List</a>
+</div>
+</div>
+<style>
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+</style>
+
+<script type="text/javascript">
+    $(function () {
+        $("#btnExcelExport").click(function () {
+            $("#CategoryRecepiesTable").table2excel({
+                filename: "CategoryRecepies.xls"
+            });
+        });
+    });
+    $("#btnPdfExport").click(function () {
+        generatePDF('CategoryRecepiesTable', 'CategoryRecepies.pdf', [5]);
+    });
+</script>

@@ -1,0 +1,47 @@
+﻿.input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    padding: 18px 16px;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all .5s ease-in-out;
+}
+
+    .input:focus::placeholder {
+        color: white;
+    }
+
+    .input:focus, .input:not(:placeholder-shown) {
+        background-color: white;
+        border: 1px solid black;
+        width: 290px;
+        cursor:text;
+        padding: 18px 16px 18px 45px;
+    }
+
+.icon {
+    position: absolute;
+    left: 0;
+    height: 45px;
+    width: 45px;
+    background-color: white;
+    border-radius: 99px;
+    z-index: -1;
+    fill: darkgoldenrod;
+    border: 1px solid rgb(91, 107, 255);
+}
+
+.input:focus + .icon, .input:not(:placeholder-shown) + .icon {
+    z-index: 0;
+    background-color: white;
+    border: none;
+}

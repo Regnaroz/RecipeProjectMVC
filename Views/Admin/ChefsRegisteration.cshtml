@@ -1,0 +1,78 @@
+﻿@model IEnumerable<RecipeBlogProject.Models.Chef>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<div class="container w-100" style="max-width:unset;margin:0px;display:flex; flex-direction:column; justify-content:space-around;">
+    <h4>Manage Chefs</h4>
+    <div class="row my-4">
+    </div>
+    <div class="row mb-5 mt-2">
+        <div class="col-lg">
+            <div class="card shadow">
+                <div class="card-header py-4 ">
+                    <div>
+                        <h6 class="m-0 font-weight-bold text-primary">New Chefs Register Requests</h6>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="chefTable" style="width=100%" cellspacing="0">
+                            <thead>
+                                <tr style="text-align:center">
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>
+
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Person.Firstname)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Person.Lastname)
+                                        </td>
+                                        <th>
+                                            @Html.DisplayFor(modelItem => item.Person.Email)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayFor(modelItem => item.Person.Phone)
+                                        </th>
+
+                                        <td>
+                                            <a class="btn btn-primary" asp-action="AcceptNewChef" asp-route-id="@item.id">Approve</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    th, td {
+        text-align: center;
+    }
+
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+</style>

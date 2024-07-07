@@ -1,0 +1,110 @@
+﻿@model IEnumerable<RecipeBlogProject.Models.Testimonial>
+
+@{
+    ViewData["Title"] = "AdminTestmonials";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container w-100" style="margin:0px;display:flex; flex-direction:column; justify-content:space-around;">
+    <div class="row my-4">
+        <h4>Manage Testmonials</h4>
+    </div>
+    <div class="row mb-5 mt-2 w-100">
+        <div class="col-lg">
+            <div class="card shadow">
+                <div class="card-header py-4 ">
+                    <div>
+                        <h6 class="m-0 font-weight-bold text-primary">Testmonials</h6>
+                    </div>
+                    <div class="btn-export-container">
+                        <button class="btn btn-outline-danger" id="btnPdfExport" value="Export">Export to pdf</button>
+                        <button class="btn btn-outline-success" id="btnExcelExport" value="Export">Export to excel</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="categoriesTable" style="width=100%" cellspacing="0">
+                            <thead>
+                                <tr style="text-align:center">
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.User)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Rating)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Usercomment)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.CreatedDate)
+                                    </th>
+                                    <th>
+                                       Visablility
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.User.Person.Firstname)  @Html.DisplayFor(modelItem => item.User.Person.Lastname)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Rating)  
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Usercomment)  
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CreatedDate)  
+                                        </td>
+                                        <td>
+                                            @if (!item.IsShown)
+                                            {
+                                                <a class="btn btn-primary" asp-action="ShowTestmonial" asp-route-id="@item.id">Show</a>
+                                            }
+                                            else
+                                            {
+                                                <a class="btn btn-danger" asp-action="HideTestmonial" asp-route-id="@item.id">Hide</a>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    td {
+        text-align: center;
+    }
+
+    @@media (min-width: 1200px) {
+        .container, .container-lg, .container-md, .container-sm, .container-xl {
+            max-width: unset;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+</style>
+<script type="text/javascript">
+    $(function () {
+        $("#btnExcelExport").click(function () {
+            $("#categoriesTable").table2excel({
+                filename: "Testmonials.xls"
+            });
+        });
+    });
+    $("#btnPdfExport").click(function () {
+        generatePDF('categoriesTable', 'Testmonials.pdf', [4]);
+    });
+</script>

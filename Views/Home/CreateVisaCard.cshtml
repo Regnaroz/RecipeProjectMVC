@@ -1,0 +1,117 @@
+﻿@model RecipeProject.Models.DataModels.BuyRecipieModel
+
+@{
+    Layout = "~/views/shared/_CreateVisaCardLayout.cshtml";
+}
+
+<div style="margin-top:10rem; margin-bottom:5rem;">
+    <div class="container">
+    <div class="row mb-5">
+        <div class="col">
+            <div class="section-title p-0 text-start">
+                <h2 class="text-start">Recipe Payment</h2>
+                <p>Buy Recipe</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container d-lg-flex flex-row" >
+    
+    <div class="box-1 bg-light user" style="color:black; background-color:white;">
+            <div class="box-inner-1" style="margin-top:3rem; margin-bottom:10rem;">
+                <div id="my" class="carousel slide carousel-fade img-details" data-bs-ride="carousel" data-bs-interval="2000">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            @if (@Model.Recipe?.ImagePath != null)
+                            {
+                                <img src=@Url.Content("~/Images/recipes-images/" + @Model.Recipe?.ImagePath) width="230px" height="230px" asp-append-version="true">
+                            }
+                        </div>
+
+                    </div>
+                </div>
+                <br />
+                <div class="userdetails">
+                    <h6 style ="margin-bottom:0.5rem;"> <Strong>Recipe Name:</Strong><p style="margin-top:0.5rem;"> @Model.Recipe.Receipename</p></h6>
+                    <h6 style="margin-bottom:0.5rem;"><Strong>Price:</Strong><p style="margin-top:0.5rem;"> $@Model.Recipe.Price</p></h6>
+                    <h6><Strong>Description:</Strong></h6>
+                    <p style="margin-bottom:0.5rem;">Lorem ipsum dolor sit amet. Sit ipsa beatae aut omnis praesentium et accusantium repellendus non laborum neque. Hic corporis alias et distinctio ullam sed eveniet laboriosam quo voluptate minima.</p>
+                    <h6 style="margin-top:0.5rem;"><strong>Ingredients:</strong></h6>
+                    <p>@Model.Recipe.Ingredients</p>
+                </div> 
+        </div> 
+    </div> 
+                    <div class="box-2 p-3" style=" color:black;"> 
+                        <div class="box-inner-2" style="margin-top:3rem; margin-bottom:10rem;"> 
+                            <div>
+                    <h4 class="fw-bold"><Strong>Payment Details</Strong></h4>
+                    <p class="mb-3">Complete your purchase by providing your payment details</p> 
+                            </div>
+                                 <form asp-action="CreateVisaCard" method="POST">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                   
+                                    <div class="container">
+                                    <h6 class=" mb-3"><strong>Card details</strong></h6>
+                                    <div class="d-flex">
+                                       <div class="form-group form-input me-3 w-30">
+                                <input asp-for="@Model.Visacard.Firstname" disabled class="form-control" placeholder="First Name">
+                                <span asp-validation-for="@Model.Visacard.Firstname" class="text-danger"></span>
+                                       </div>
+                                       <div class="form-group form-input me-3">
+                                <input asp-for="@Model.Visacard.Lastname" disabled class="form-control" placeholder="Last Name">
+                                <span asp-validation-for="@Model.Visacard.Lastname" class="text-danger"></span>
+                                       </div>
+                                    </div>
+                                        <br />
+                                         <div class="d-flex align-items-center justify-content-between  card-atm p-0 ">
+                            <div class="form-group form-control p-0 w-75">
+                                <input asp-for="@Model.Visacard.Cardnumber" disabled class="form-control" placeholder="Card Number">
+                                <span asp-validation-for="@Model.Visacard.Cardnumber" class="text-danger"></span>
+                                             </div>
+                                            <div class="form-group form-input` d-flex w-50">
+                                <input asp-for="@Model.Visacard.Cvv" disabled style="    margin-inline-start: 1rem;
+    margin-inline-end: 5rem;" type="text" maxlength=3 class="form-control" placeholder="CVV">
+                                <span asp-validation-for="@Model.Visacard.Cvv" class="text-danger"></span>
+                                             </div>
+                                        </div>
+                                        <br/>
+                                         <div class="d-flex">
+                                             <div class="form-group form-input me-3 w-30">
+                                <input asp-for="@Model.Visacard.Expirydate" disabled type="text" class="form-control" placeholder="Expiry Date">
+                                <span asp-validation-for="@Model.Visacard.Expirydate" class="text-danger"></span>
+                                             </div>
+                                         </div>
+                                         <br />
+                       
+                            <a  class="btn btn-primary" asp-action="UserVisaCardInformation" asp-route-id="@Model.Recipe.id" style=" background-color:gray;color:white;">
+                                Edit Card Information
+                            </a>
+                       
+                                         <hr />
+                                        <div class="address"> 
+                                                    <div class="d-flex flex-column dis"> 
+                                                        <div class="d-flex align-items-center justify-content-between mb-2">
+                                    <h6 class="fw-bold"><strong>Total</strong></h6>
+                                    <h6 class="fw-bold"><span class="fas fa-dollar-sign"></span><strong>$@Model.Recipe.Price</strong></h6>
+                                </div>
+                                <div class="btn btn-primary mt-2" style="background-color:#cda45e">
+                                    <a asp-controller="Home" asp-route-id="@Model.Recipe.id" asp-action="BuyRecipe" style="color:white"> Buy</a>
+                                                        </div> 
+                                                    </div> 
+                                        </div> 
+                                    </div> 
+                                </form> 
+                        </div> 
+                    </div> 
+</div>
+</div>
+<style>
+    .box-1 , .box-2{
+        background-color: white !important;
+    }
+</style>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,306 @@
+﻿@model RecipeProject.Models.DataModels.WebisteDetailsModel;
+@{
+    TempData["Title"] = "Home Page";
+    Layout = "~/views/shared/_HomeLayout.cshtml";
+}
+
+
+
+<main id="main">
+
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+        <div class="container" data-aos="fade-up">
+
+            <div class="row">
+                <div class="col-lg-6 order-1 order-lg-2" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="about-img">
+                        <img src="~/Home/assets/img/about.jpg" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
+                    <h3 style="color:white">Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
+                    <p class="fst-italic" style="color:white">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua.
+                    </p>
+                    <ul>
+                        <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
+                        <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
+                        <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
+                    </ul>
+                    <p style="color:white">
+                        Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                        culpa qui officia deserunt mollit anim id est laborum
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section><!-- End About Section -->
+
+
+    <!-- ======= Why Us Section ======= -->
+    <section id="why-us" class="why-us">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+                <h2>Why Us</h2>
+                <p>Why Choose Our Recipe Blog</p>
+            </div>
+
+            <div class="row">
+
+                <div class="col-lg-4">
+                    <div class="box" data-aos="zoom-in" data-aos-delay="100">
+                        <span>01</span>
+                        <h4>Lorem Ipsum</h4>
+                        <p>Ulamco laboris nisi ut aliquip ex ea commodo consequat. Et consectetur ducimus vero placeat</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 mt-4 mt-lg-0">
+                    <div class="box" data-aos="zoom-in" data-aos-delay="200">
+                        <span>02</span>
+                        <h4>Repellat Nihil</h4>
+                        <p>Dolorem est fugiat occaecati voluptate velit esse. Dicta veritatis dolor quod et vel dire leno para dest</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 mt-4 mt-lg-0">
+                    <div class="box" data-aos="zoom-in" data-aos-delay="300">
+                        <span>03</span>
+                        <h4> Ad ad velit qui</h4>
+                        <p>Molestiae officiis omnis illo asperiores. Aut doloribus vitae sunt debitis quo vel nam quis</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section><!-- End Why Us Section -->
+
+   
+        <!-- ======= Testimonials Section ======= -->
+        <section id="testimonials" class="testimonials section-bg">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>Testimonials</h2>
+                    <p>What they're saying about us</p>
+                </div>
+
+                <div class="testimonials-slider swiper-container" data-aos="fade-up" data-aos-delay="100">
+                    <div class="swiper-wrapper">
+
+                      @foreach(var testmonial in Model.Testimonials)
+                    {
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <p style="color:white">
+                                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                   @testmonial.Usercomment
+                                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                </p>
+                                <img src="~/@testmonial.User.Person.ImagePath" class="testimonial-img" alt="">
+                                <h3>@testmonial.User.Person.Firstname @testmonial.User.Person.Lastname</h3>
+                            </div>
+                        </div>
+                    }
+
+                       
+
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- End Testimonials Section -->
+ 
+    
+    
+
+  
+   <!-- End Chefs Section -->
+
+   @if(TempData["UserId"] is not null)
+    {
+        <section id="RateUs" class="contact">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>Rate Us</h2>
+                    <p>Share with us your expierence </p>
+                </div>
+            </div>
+            <div class="container" data-aos="fade-up">
+
+                <div class="row mt-5">
+
+                    <div class="col-lg-12 mt-5 mt-lg-0">
+
+                        <form asp-controller="Home" asp-action="SubmitTestimonial" method="post"  class="">
+                            <div class="php-email-form">
+                                <div class="form-group stars-group d-flex mt-3" style="    align-items: center;
+    justify-content: center;
+    gap: 3rem;">
+                                    <label for="rating">Rate Us:</label><br>
+                                    <div class="stars">
+                                        <div class="rating d-flex" style="gap:1rem;">
+                                            <span data-value="1">☆</span><span data-value="2">☆</span><span data-value="3">☆</span><span data-value="4">☆</span><span data-value="5">☆</span>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="rating" id="rating" required>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <textarea class="rate-us-text form-control" name="message" rows="8" placeholder="Message" required></textarea>
+                                </div>
+                                <div class="text-center"><button type="submit">Share</button></div>
+                            </div>
+                        </form>
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- End Contact Section -->
+    }
+
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+                <h2>Contact</h2>
+                <p>@ViewBag.HomePageContactUs</p>
+            </div>
+        </div>
+        <div class="container" data-aos="fade-up">
+
+            <div class="row mt-5">
+
+                <div class="col-lg-4">
+                    <div class="info">
+                        <div class="address">
+                            <i class="bi bi-geo-alt"></i>
+                            <h4 style="color:white">Location:</h4>
+                            <p>@ViewBag.HomePageFooter</p>
+                        </div>  
+
+                        <div class="open-hours">
+                            <i class="bi bi-clock"></i>
+                            <h4 style="color:white">Open Hours:</h4>
+                            <p>
+                                Monday-Saturday:<br>
+                                11:00 AM - 2300 PM
+                            </p>
+                        </div>
+
+                        <div class="email">
+                            <i class="bi bi-envelope"></i>
+                            <h4 style="color:white">Email:</h4>
+                            <p>info@example.com</p>
+                        </div>
+
+                        <div class="phone">
+                            <i class="bi bi-phone"></i>
+                            <h4 style="color:white">Call:</h4>
+                            <p>+1 5589 55488 55s</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-8 mt-5 mt-lg-0">
+
+                    <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                            </div>
+                            <div class="col-md-6 form-group mt-3 mt-md-0">
+                                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                        </div>
+                        <div class="form-group mt-3">
+                            <textarea class="form-control" name="message" rows="8" placeholder="Message" required></textarea>
+                        </div>
+                        <div class="my-3">
+                            <div class="loading">Loading</div>
+                            <div class="error-message"></div>
+                            <div class="sent-message">Your message has been sent. Thank you!</div>
+                        </div>
+                        <div class="text-center"><button class="rate-us-send" type="submit">Send Message</button></div>
+                    </form>
+
+                </div>
+
+                
+            </div>
+
+        </div>
+    </section><!-- End Contact Section -->
+<style>
+        .stars .rating span {
+            font-size: 2em;
+            cursor: pointer;
+            color: gray;
+        }
+        .stars .rating span.selected {
+            color: gold;
+        }
+
+        .rate-us-text{
+            border-radius: 0;
+            box-shadow: none;
+            font-size: 14px;
+            background: #0c0b09;
+            border-color: #625b4b;
+            color: white;
+        }
+
+        .rate-us-send{
+            background: #cda45e;
+            border: 0;
+            padding: 10px 35px;
+            color: #fff;
+            transition: 0.4s;
+            border-radius: 50px;
+        }
+</style>
+  <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const stars = document.querySelectorAll('.stars .rating span');
+            const ratingInput = document.getElementById('rating');
+
+            stars.forEach(star => {
+                star.addEventListener('click', (event) => {
+                    const value = event.target.getAttribute('data-value');
+                    ratingInput.value = value;
+
+                    stars.forEach(s => s.classList.remove('selected'));
+                    event.target.classList.add('selected');
+                    let prevSibling = event.target.previousElementSibling;
+                    while (prevSibling) {
+                        prevSibling.classList.add('selected');
+                        prevSibling = prevSibling.previousElementSibling;
+                    }
+                });
+            });
+        });
+    </script>
+</main><!-- End #main -->
+

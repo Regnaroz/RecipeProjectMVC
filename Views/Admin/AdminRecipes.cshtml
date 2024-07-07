@@ -1,0 +1,151 @@
+﻿@model IEnumerable<RecipeBlogProject.Models.Recipe>
+    
+@{
+    ViewData["Title"] = "AdminRecipes";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container" style="display:flex; flex-direction:column; justify-content:space-around;">
+    <h4>Manage Recepies</h4>
+   
+<div class="row mb-5 mt-2">
+    <div class="col-lg">
+        <div class="card shadow">
+            <div class="card-header py-4 ">
+               <div>
+                        <h6 class="m-0 font-weight-bold text-primary">Recepies</h6>
+               </div>
+               <div class="btn-export-container">
+                        <button class="btn btn-outline-danger" id="btnPdfExport" value="Export">Export to pdf</button>
+                   <button class="btn btn-outline-success" id="btnExcelExport" value="Export">Export to excel</button>
+               </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" style="width:100%;" cellspacing="0">
+                        <thead>
+                            <tr style="text-align:center">
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Receipename)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Price)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Ingredients)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Chef)
+                                    </th>
+                                    <th>
+                                       Approved
+                                    </th>
+                                    <th>
+                                        Enabled
+                                    </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Receipename)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Price)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Ingredients)
+                                    </td>
+                                   
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Chef.Person.Firstname) @Html.DisplayFor(modelItem => item.Chef.Person.Lastname)
+                                    </td>
+                                        <td>
+                                            @if (item.Isapproved)
+                                            {
+                                                <p>Approved</p>
+                                            }
+                                            else
+                                            {
+                                                <p>Not Approved</p>
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (item.IsDeleted)
+                                            {
+                                                <p>Disabled</p>
+                                            }
+                                            else
+                                            {
+                                                <p>Enabled</p>
+                                            }
+                                        </td>
+                                    <td>
+                                            <a class="btn btn-secondary" asp-action="AdminEditRecipes" asp-route-id="@item.id">Edit</a> |
+                                            <a class="btn btn-info" asp-action="AdminRecipeDetails" asp-route-id="@item.id">Details</a> |
+                                        @if (item.IsDeleted)
+                                            {
+                                                <a class="btn btn-primary" asp-action="EnableRecepie" asp-route-id="@item.id">Enable</a>
+                                                
+                                                
+                                        }
+                                        else
+                                        {
+                                                <a class="btn btn-danger" asp-action="DisableRecepie" asp-route-id="@item.id">Disable</a>
+                                               
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+ <style>
+   /*  .container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl {
+        padding-left: 0; 
+         padding-right:0;
+    } */
+    th{
+        width:auto !important;
+    }
+
+    td {
+        text-align: center;
+    }
+    @@media(min-width:1200px){
+        .container{
+            max-width:unset!important;
+        }
+    }
+
+    .card-header{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+    }
+    </style>
+
+
+
+
+
+<script type="text/javascript">
+    $(function () {
+        $("#btnExcelExport").click(function () {
+            $("#dataTable").table2excel({
+                filename: "Recepies.xls"
+            });
+        });
+    });
+    $("#btnPdfExport").click(function () {
+        generatePDF('dataTable', 'Table.pdf', [6]);
+    });
+</script>

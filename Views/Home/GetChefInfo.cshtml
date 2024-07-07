@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Chef>;
+
+@{
+    Layout = "~/views/shared/_GetChefInfoLayout.cshtml";
+}
+
+<!-- ======= Chefs Section ======= -->
+<section id="chefs" class="chefs" style="margin-top:7rem; margin-bottom:20rem;">
+    <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+            <h2>Chefs</h2>
+            <p>Our Proffesional Chefs</p>
+        </div>
+
+        <div class="row">
+            @foreach (var item in ViewBag.chefs)
+            {
+                <div class="col-lg-4 col-md-6">
+                    <div class="member" data-aos="zoom-in" data-aos-delay="100">
+                        <img src="~/Home/assets/img/chefs/chef-logo.jpg" class="img-fluid" alt="" asp-append-version="true">
+                        <div class="member-info">
+                            <div class="member-info-content">
+                                <h4>@item.Person.Firstname @item.Person.Lastname</h4>
+                                <span>Master Chef</span>
+                                <br />
+                                <h6>Contact Me: @item.Person.Email</h6>
+                            </div>
+                            <div class="social">
+                                <a  asp-action="GetChefRecipes" asp-route-id="@item.id" class="btn btn-secondary" style="border:3px solid #cda45e; color:White;  background-color:black; padding:8px 25px; text-transform:uppercase; font-size:13px; font-weight:500; letter-spacing:1px; transition:0.3s;">
+                                    Browse Chef Recipes
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+</section><!-- End Chefs Section -->
